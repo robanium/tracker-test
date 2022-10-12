@@ -1,0 +1,6 @@
+{
+  "client": {
+    "address": "localhost",
+    "port": 8000
+  }
+}
