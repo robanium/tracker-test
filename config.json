@@ -2,5 +2,10 @@
   "client": {
     "address": "localhost",
     "port": 8000
+  },
+
+  "server": {
+    "address": "localhost",
+    "port": 8001
   }
 }
