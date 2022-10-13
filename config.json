@@ -6,6 +6,9 @@
 
   "server": {
     "address": "localhost",
-    "port": 8001
+    "port": 8001,
+    "cors": {
+      "origin": "http://localhost:8000/"
+    }
   }
 }
