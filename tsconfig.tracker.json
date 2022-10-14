@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["./tracker/**/*"],
+  "compilerOptions": {
+    "lib": ["es5", "es6", "dom"],
+    "target": "es5",
+    "module": "esnext"
+  }
+}

@@ -13,12 +13,24 @@ function copyClientView() {
 }
 
 function compileTypescript(done) {
-  execSync("npx tsc --project tsconfig.json", { stdio: "inherit" });
+  execSync("npx tsc --project tsconfig.node.json", { stdio: "inherit" });
+  done();
+}
+
+function compileTypescriptTracker(done) {
+  execSync("npx rollup --config rollup.tracker.js --bundleConfigAsCjs", {
+    stdio: "inherit",
+  });
   done();
 }
 
 exports.clean = clean;
-exports.build = gulp.series(clean, compileTypescript, copyClientView);
+exports.build = gulp.series(
+  clean,
+  compileTypescript,
+  compileTypescriptTracker,
+  copyClientView
+);
 
 exports.default = function (done) {
   console.log("Default Build");
