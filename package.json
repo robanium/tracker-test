@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx gulp build && node ./.build/index.js",
     "build": "npx gulp build",
-    "clean": "npx gulp clean"
+    "clean": "npx gulp clean",
+    "develop": "npx gulp develop"
   },
   "author": "Steven Glukhov",
   "license": "ISC",
