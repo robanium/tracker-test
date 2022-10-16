@@ -1,4 +1,4 @@
-import config from "./config.json";
+import config from "./config.node.json";
 import runClient from "./client";
 import runServer from "./server";
 
