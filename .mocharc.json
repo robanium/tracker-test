@@ -1,0 +1,6 @@
+{
+  "extension": ["ts"],
+  "spec": ["server/**/*.spec.ts", "tracker/**/*.spec.ts"],
+  "watch-files": ["server/**/*.ts", "tracker/**/*.ts"],
+  "node-option": ["loader=ts-node/esm"]
+}

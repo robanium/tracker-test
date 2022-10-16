@@ -1,4 +1,5 @@
 const typescript = require("@rollup/plugin-typescript");
+const { nodeResolve } = require("@rollup/plugin-node-resolve");
 
 export default {
   input: "tracker/index.ts",
@@ -8,6 +9,7 @@ export default {
     format: "iife",
   },
   plugins: [
+    nodeResolve(),
     typescript({
       tsconfig: __dirname + "/tsconfig.tracker.json",
     }),

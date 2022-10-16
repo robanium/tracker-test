@@ -8,7 +8,7 @@
     "address": "localhost",
     "port": 8001,
     "cors": {
-      "origin": "http://localhost:8000/"
+      "origin": "http://localhost:8000"
     }
   }
 }

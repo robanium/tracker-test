@@ -3,7 +3,8 @@
   "include": ["./tracker/**/*"],
   "compilerOptions": {
     "lib": ["es5", "es6", "dom"],
-    "target": "es5",
+    "isolatedModules": true,
+    "target": "ESNext",
     "module": "esnext"
   }
 }

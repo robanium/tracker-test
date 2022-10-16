@@ -3,6 +3,26 @@ const gulp = require("gulp");
 const del = require("delete");
 const nodemon = require("nodemon");
 
+function All_test(done) {
+  /**
+   * See: https://www.npmjs.com/package/ts-node#import-statements
+   * You may need tsconfig.json compiler options for module to be something other than commonjs.
+   * You can still set it to commonjs only for testing. The workaround is to set the environment variable
+   * TS_NODE_COMPILER_OPTIONS when executing mocha to give ts-node a module setting of commonjs.
+   * For example, in package.json:
+   */
+  execSync(
+    'env TS_NODE_COMPILER_OPTIONS=\'{"module": "commonjs" }\' npx mocha --config .mocharc.json',
+    { stdio: "inherit" }
+  );
+  done();
+}
+
+function All_TestWatch(done) {
+  gulp.watch(["**/*.spec.ts"], All_test);
+  done();
+}
+
 function ClientAndServer_clean(done) {
   del("./.build/", done);
 }
@@ -26,7 +46,7 @@ function Tracker_compile(done) {
 }
 
 function Tracker_WatchCompile(done) {
-  gulp.watch("./tracker/**/*", Tracker_compile);
+  gulp.watch(["./tracker/**/*.ts", "!./tracker/**/*.spec.ts"], Tracker_compile);
   done();
 }
 
@@ -55,8 +75,10 @@ exports.develop = gulp.series(
   exports.build,
   Tracker_WatchCompile,
   ClientAndServer_WatchCompile,
+  All_TestWatch,
   ClientAndServer_nodemon
 );
+exports.test = All_test;
 
 exports.default = function (done) {
   console.log("Default Build");
