@@ -34,21 +34,6 @@ interface ITracker {
   track(event: string, ...tags: string[]): void;
 }
 
-interface TrackerOptions {
-  /**
-   * URL address for sync events
-   */
-  address: string;
-  /**
-   * Max number of events for force sync
-   */
-  syncMaxEvents: number;
-  /**
-   * Time interval sync in ms
-   */
-  syncTimeInterval: number;
-}
-
 class Tracker implements ITracker {
   private buff: Map<string, object> = new Map();
 
