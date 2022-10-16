@@ -4,7 +4,7 @@
   "compilerOptions": {
     "lib": ["es5", "es6", "dom"],
     "isolatedModules": true,
-    "target": "ESNext",
+    "target": "es5",
     "module": "esnext"
   }
 }

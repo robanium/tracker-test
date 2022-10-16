@@ -46,7 +46,10 @@ function Tracker_compile(done) {
 }
 
 function Tracker_WatchCompile(done) {
-  gulp.watch(["./tracker/**/*.ts", "!./tracker/**/*.spec.ts"], Tracker_compile);
+  gulp.watch(
+    ["./tracker/**/*.ts", "config.tracker.json", "!./tracker/**/*.spec.ts"],
+    Tracker_compile
+  );
   done();
 }
 

@@ -1,0 +1,5 @@
+{
+  "address": "http://localhost:8001",
+  "syncMaxEvents": 3,
+  "syncTimeInterval": 1000
+}
