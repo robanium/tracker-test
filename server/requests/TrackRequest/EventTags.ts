@@ -12,8 +12,8 @@ export default class EventTags {
     if (value.length > 16) throw new Error("Cant contain more then 16 tags");
   }
 
-  public getValue(): EventTag[] {
-    return this.value;
+  public getValue(): string[] {
+    return this.value.map((x) => x.getValue());
   }
 
   public constructor(value?: EventTag[]) {
