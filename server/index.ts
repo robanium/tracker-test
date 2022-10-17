@@ -19,6 +19,7 @@ export default async function (config: any) {
       dbName: config.mongodb.dbname,
       user: config.mongodb.user,
       pass: config.mongodb.pass,
+      autoCreate: config.mongodb.autocreate,
     });
 
     // Start server

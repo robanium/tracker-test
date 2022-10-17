@@ -35,7 +35,7 @@ async function Server_StartMongodbInMemory() {
   const uri = mongodbServer.getUri() + "/" + config.server.mongodb.dbname;
   const con = await MongoClient.connect(uri);
   const db = con.db(config.server.mongodb.dbname);
-  db.createCollection("track");
+  db.createCollection("tracks");
 }
 
 function All_TestWatch(done) {
