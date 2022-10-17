@@ -9,6 +9,11 @@
     "port": 8001,
     "cors": {
       "origin": "http://localhost:8000"
+    },
+    "mongodb": {
+      "address": "localhost",
+      "port": 27017,
+      "dbname": "tracker"
     }
   }
 }

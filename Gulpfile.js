@@ -2,6 +2,9 @@ const execSync = require("child_process").execSync;
 const gulp = require("gulp");
 const del = require("delete");
 const nodemon = require("nodemon");
+const { MongoMemoryServer } = require("mongodb-memory-server");
+const { MongoClient } = require("mongodb");
+const config = require("./config.node.json");
 
 function All_test(done) {
   /**
@@ -16,6 +19,25 @@ function All_test(done) {
     { stdio: "inherit" }
   );
   done();
+}
+
+async function Server_StartMongodbInMemory() {
+  // This will create an new instance of "MongoMemoryServer" and automatically start it
+  const mongodbServer = await MongoMemoryServer.create({
+    instance: {
+      ip: config.server.mongodb.address,
+      port: config.server.mongodb.port,
+      dbName: config.server.mongodb.dbname,
+    },
+  });
+
+  // Create a track collection
+  const con = await MongoClient.connect(
+    mongodbServer.getUri() + "/" + config.server.mongodb.dbname,
+    {}
+  );
+  const db = con.db(config.server.mongodb.dbname);
+  db.createCollection("track");
 }
 
 function All_TestWatch(done) {
@@ -76,6 +98,7 @@ exports.build = gulp.series(
 );
 exports.develop = gulp.series(
   exports.build,
+  Server_StartMongodbInMemory,
   Tracker_WatchCompile,
   ClientAndServer_WatchCompile,
   All_TestWatch,

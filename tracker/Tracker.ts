@@ -49,9 +49,9 @@ export default class Tracker implements ITracker {
    * @param event: MouseEvent
    */
   private async handleClick(event: MouseEvent) {
-    // event.preventDefault();
-    // event.stopPropagation();
-    // event.stopImmediatePropagation();
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
 
     console.log(this.buff.size());
 
