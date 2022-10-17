@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
+import mongoose from "mongoose";
 import routes from "./routes";
 import cors from "cors";
 
-export default function (config: any) {
+export default async function (config: any) {
   const app = express();
 
   app.disable("etag");
@@ -10,13 +11,28 @@ export default function (config: any) {
   app.use(cors(config.cors || {}));
   app.use(routes);
 
-  app.listen(config.port, config.address, () => {
-    console.log(
-      "Backend Server Started at http://" +
-        config.address +
-        ":" +
-        config.port +
-        "/"
-    );
-  });
+  try {
+    // Connect to mongodb
+    const uri =
+      "mongodb://" + config.mongodb.address + ":" + config.mongodb.port;
+    await mongoose.connect(uri, {
+      dbName: config.mongodb.dbname,
+      user: config.mongodb.user,
+      pass: config.mongodb.pass,
+    });
+
+    // Start server
+    app.listen(config.port, config.address, () => {
+      console.log(
+        "Backend Server Started at http://" +
+          config.address +
+          ":" +
+          config.port +
+          "/"
+      );
+    });
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 }

@@ -32,10 +32,8 @@ async function Server_StartMongodbInMemory() {
   });
 
   // Create a track collection
-  const con = await MongoClient.connect(
-    mongodbServer.getUri() + "/" + config.server.mongodb.dbname,
-    {}
-  );
+  const uri = mongodbServer.getUri() + "/" + config.server.mongodb.dbname;
+  const con = await MongoClient.connect(uri);
   const db = con.db(config.server.mongodb.dbname);
   db.createCollection("track");
 }
@@ -89,6 +87,11 @@ function ClientAndServer_nodemon() {
   });
 }
 
+function ClientAndServer_Run(done) {
+  execSync("node ./.build/index.js", { stdio: "inherit" });
+  done();
+}
+
 exports.clean = ClientAndServer_clean;
 exports.build = gulp.series(
   ClientAndServer_clean,
@@ -104,9 +107,11 @@ exports.develop = gulp.series(
   All_TestWatch,
   ClientAndServer_nodemon
 );
+exports.start = gulp.series(
+  exports.build,
+  Server_StartMongodbInMemory,
+  ClientAndServer_Run
+);
 exports.test = All_test;
 
-exports.default = function (done) {
-  console.log("Default Build");
-  done();
-};
+exports.default = exports.develop;

@@ -11,9 +11,11 @@
       "origin": "http://localhost:8000"
     },
     "mongodb": {
-      "address": "localhost",
+      "address": "127.0.0.1",
       "port": 27017,
-      "dbname": "tracker"
+      "dbname": "tracker",
+      "user": "",
+      "pass": ""
     }
   }
 }
