@@ -8,11 +8,11 @@ export default class EventTag {
   }
 
   private normalize(value: string) {
-    return value.toLowerCase().replace(/[^a-z]/g, "");
+    return value.toLowerCase().replace(/[^a-z0-9]/g, "");
   }
 
   private validate(value: string): void {
-    let validator = z.string().min(4).max(32);
+    let validator = z.string().min(1).max(32);
     validator.parse(value);
   }
 

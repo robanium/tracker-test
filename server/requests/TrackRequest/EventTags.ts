@@ -4,7 +4,7 @@ import EventTag from "./EventTag";
 export default class EventTags {
   private value: EventTag[] = [];
 
-  static create(value?: EventTag[]) {
+  static create(value?: string[]) {
     return new EventTags(value);
   }
 
@@ -16,9 +16,10 @@ export default class EventTags {
     return this.value.map((x) => x.getValue());
   }
 
-  public constructor(value?: EventTag[]) {
+  public constructor(value?: string[]) {
     value = value || [];
-    this.validate(value);
-    this.value = value;
+    const tags = value.map((x) => EventTag.create(x));
+    this.validate(tags);
+    this.value = tags;
   }
 }

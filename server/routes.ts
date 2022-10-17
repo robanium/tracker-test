@@ -1,5 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import Track from "./models/trackModel";
+import TrackEventRequest from "./requests/TrackRequest/TrackEventRequet";
 
 const routes = Router();
 
@@ -11,10 +12,22 @@ routes.post(
   "/track",
   express.json({ type: ["text/plain", "application/json"] }),
   (req: Request, res: Response) => {
-    Track.create(...req.body);
+    try {
+      req.body = Array.isArray(req.body) ? req.body : [req.body];
 
-    console.log(req.body);
-    res.status(200).json({ status: 200 });
+      const trackReq = req.body.map((x: object) => {
+        const r = new TrackEventRequest(x);
+        return r.getValue();
+      });
+
+      console.log(trackReq);
+
+      Track.create(trackReq);
+      res.status(200).json({ status: 200 });
+    } catch (e) {
+      console.error(e);
+      res.status(500).json({ status: 500 });
+    }
   }
 );
 
