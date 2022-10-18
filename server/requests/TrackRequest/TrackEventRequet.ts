@@ -1,6 +1,5 @@
 import EventName from "./EventName";
 import EventTags from "./EventTags";
-import EventTag from "./EventTag";
 import EventTitle from "./EventTitle";
 import EventURL from "./EventURL";
 import EventTime from "./EventTime";
