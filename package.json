@@ -14,6 +14,10 @@
   "contributors": [
     "Steven Glukhov <steven.glukhov@gmail.com>"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robanium/tracker-test.git"
+  },
   "license": "ISC",
   "devDependencies": {
     "@rollup/plugin-json": "^5.0.0",
